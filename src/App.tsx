@@ -1,10 +1,10 @@
 import "./styles/App.css";
+import { Test } from "./components/test";
 
 function App() {
   return (
     <div className="App">
-      <h1>HALLO</h1>
-      <h2>{import.meta.env.VITE_CLIENT_ID}</h2>
+      <Test />
     </div>
   );
 }
