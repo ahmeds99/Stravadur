@@ -1,8 +1,9 @@
 import { Athlete } from "./types";
 
 export async function getActivities(accessToken: string) {
+  const params = new URLSearchParams({ per_page: "200" });
   const response = await fetch(
-    "https://www.strava.com/api/v3/athlete/activities",
+    "https://www.strava.com/api/v3/athlete/activities?" + params,
     {
       method: "GET",
       headers: {
@@ -11,6 +12,7 @@ export async function getActivities(accessToken: string) {
     }
   );
 
+  if (!response.ok) return null;
   return await response.json();
 }
 
@@ -22,8 +24,8 @@ export async function getAthlete(accessToken: string): Promise<Athlete | null> {
     },
   });
 
-  if (!response.ok) return null;
-  return mapAthlete(await response.json());
+  // If res.ok, return the mapped (JSON -> Athlete) athlete, else null
+  return response.ok ? mapAthlete(await response.json()) : null;
 }
 
 const mapAthlete = (data: any): Athlete => {

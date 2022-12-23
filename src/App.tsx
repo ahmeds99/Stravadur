@@ -1,10 +1,34 @@
 import "./styles/App.css";
-import { Test } from "./components/Test";
+import { useEffect, useRef, useState } from "react";
+import { updateToken } from "./api/auth";
+import { Athlete } from "./api/types";
+import { getAthlete } from "./api/api";
+import { Activites } from "./pages/activities/Activities";
 
 function App() {
+  const [accessToken, setAccessToken] = useState("");
+  const [athlete, setAthlete] = useState<Athlete | null>(null);
+
+  useEffect(() => {
+    updateToken().then((token) => {
+      if (token) setAccessToken(token);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (accessToken)
+      getAthlete(accessToken).then((athlete) => setAthlete(athlete));
+  }, [accessToken]);
+
   return (
     <div className="App">
-      <Test />
+      {athlete && (
+        <div>
+          <h1>{athlete.firstname}</h1>
+          <h2>{athlete.createdAt.toString()}</h2>
+        </div>
+      )}
+      {accessToken && <Activites accessToken={accessToken} />}
     </div>
   );
 }
