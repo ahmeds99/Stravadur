@@ -1,6 +1,4 @@
-export async function updateToken(
-  setAccessToken: React.Dispatch<React.SetStateAction<string>>
-): Promise<void | Response> {
+export async function updateToken(): Promise<null | string> {
   const clientId = import.meta.env.VITE_CLIENT_ID;
   const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
   const refreshToken = import.meta.env.VITE_REFRESH_TOKEN;
@@ -14,11 +12,9 @@ export async function updateToken(
   const response = await fetch("https://www.strava.com/api/v3/oauth/token", {
     method: "POST",
     body: formdata,
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setAccessToken(data.access_token);
-    });
+  });
+  if (!response.ok) return null;
 
-  return response;
+  const data = await response.json();
+  return data.access_token;
 }
