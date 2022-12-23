@@ -5,7 +5,7 @@ export async function updateToken(
   const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
   const refreshToken = import.meta.env.VITE_REFRESH_TOKEN;
 
-  var formdata = new FormData();
+  let formdata = new FormData();
   formdata.append("client_id", clientId);
   formdata.append("client_secret", clientSecret);
   formdata.append("refresh_token", refreshToken);
