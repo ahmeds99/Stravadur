@@ -1,9 +1,9 @@
 export interface Athlete {
-  id: string;
+  id: number;
   username: string;
   firstname: string;
   lastname: string;
-  city: string;
-  country: string;
-  created_at: string;
+  city?: any;
+  country?: any;
+  createdAt: Date;
 }
