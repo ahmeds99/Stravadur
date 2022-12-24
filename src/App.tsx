@@ -1,5 +1,5 @@
 import "./styles/App.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateToken } from "./api/auth";
 import { Athlete } from "./api/types";
 import { getAthlete } from "./api/api";
@@ -24,8 +24,8 @@ function App() {
     <div className="App">
       {athlete && (
         <div>
-          <h1>{athlete.firstname}</h1>
-          <h2>{athlete.createdAt.toString()}</h2>
+          <h1>Innlogget bruker: {athlete.firstname}</h1>
+          <h2>Aktiviteter:</h2>
         </div>
       )}
       {accessToken && <Activites accessToken={accessToken} />}
