@@ -1,0 +1,14 @@
+.activity-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.activity {
+  background: rgb(255, 239, 213);
+  padding: 20px;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+}
